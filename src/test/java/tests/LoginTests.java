@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class LoginTests extends BaseTestPage{
 
     @Test(priority = 1)
@@ -66,15 +68,14 @@ public class LoginTests extends BaseTestPage{
     public void logout() throws InterruptedException {
         homePage.login();
         loginPage.login();
-        //WebElement logout = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
         Assert.assertTrue(homePage.getLogoutBtn().isDisplayed());
         homePage.logout();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         String url = driver.getCurrentUrl();
         Assert.assertTrue(url.contains("login"));
-        homePage.getHome().click();
-        Thread.sleep(15000);
-
-
+        driver.get("https://vue-demo.daniel-avellaneda.com/home");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
 
