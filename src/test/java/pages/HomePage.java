@@ -56,4 +56,8 @@ public class HomePage extends BasePage  {
         getLogoutBtn().click();
     }
 
+    public void signup(){
+        getSignUp().click();
+    }
+
 }

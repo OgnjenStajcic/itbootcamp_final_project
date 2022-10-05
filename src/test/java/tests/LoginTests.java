@@ -22,8 +22,11 @@ public class LoginTests extends BaseTestPage{
         homePage.login();
         Thread.sleep(1000);
         String expected = "email";
-        String actual = loginPage.getAttribute();
+        String actual = loginPage.getEmail().getAttribute("type");
         Assert.assertTrue(actual.equals(expected));
+        String expctd = "password";
+        String actl = loginPage.getPassword().getAttribute("type");
+        Assert.assertTrue(actl.equals(expctd));
     }
 
     @Test(priority = 3)
