@@ -12,8 +12,9 @@ public class HomePage extends BasePage  {
     protected By login = By.xpath("//*[@id=\"app\"]/div/div/header/div/div[3]/a[3]");
     protected By signUp = By.xpath("//*[@id=\"app\"]/div/div/header/div/div[3]/a[4]/span");
     protected By switchTheme = By.id("input-26");
+    protected By logoutBtn = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]");
 
-    private By language = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button/span");
+    protected By language = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button/span");
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -43,8 +44,16 @@ public class HomePage extends BasePage  {
         return getDriver().findElement(language);
     }
 
-    private void login(){
+    public WebElement getLogoutBtn() {
+        return getDriver().findElement(logoutBtn);
+    }
+
+    public void login(){
         getLogin().click();
+    }
+
+    public void logout(){
+        getLogoutBtn().click();
     }
 
 }
