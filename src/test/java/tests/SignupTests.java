@@ -46,15 +46,6 @@ public class SignupTests extends BaseTestPage{
     }
 
 
-    //Test #4: Signup
-    //Podaci:
-    //name: Ime i prezime polaznika
-    //email template: ime.prezime@itbootcamp.rs
-    //password: 12346
-    //confirm password: 123456
-    //assert:
-    //Verifikovati da dijalog za obavestenje sadrzi tekst IMPORTANT:
-    //Verify your account
 
     @Test(priority = 4)
     public void signup() throws InterruptedException {
