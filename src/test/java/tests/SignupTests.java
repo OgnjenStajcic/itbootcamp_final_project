@@ -56,12 +56,16 @@ public class SignupTests extends BaseTestPage{
     //Verifikovati da dijalog za obavestenje sadrzi tekst IMPORTANT:
     //Verify your account
 
-//    @Test(priority = 4)
-//    public void signup() throws InterruptedException {
-//        homePage.signup();
-//        signupPage.signUp("Ognjen Stajcic", "ognjen.stajcic@itbootcamp.rs", "12346", "12346");
-//        Thread.sleep(1500);
-//    }
+    @Test(priority = 4)
+    public void signup() throws InterruptedException {
+        homePage.signup();
+        signupPage.signUp("Ognjen Stajcic", "badr.hari@itbootcamp.rs", "123456", "123456");
+        Thread.sleep(3000);
+        WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"));
+        Assert.assertEquals(msgBox.getText(), "IMPORTANT: Verify your account");
+        WebElement closeBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[3]/button/span"));
+        closeBtn.click();
+    }
 
 
 }

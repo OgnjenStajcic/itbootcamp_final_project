@@ -1,14 +1,12 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import pages.AdminCitiesPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.SignupPage;
@@ -22,6 +20,7 @@ public abstract class BaseTestPage {
     protected LoginPage loginPage;
     protected HomePage homePage;
     protected SignupPage signupPage;
+    protected AdminCitiesPage adminCitiesPage;
 
 
     @BeforeClass
@@ -32,6 +31,7 @@ public abstract class BaseTestPage {
         loginPage = new LoginPage(driver, wait);
         homePage = new HomePage(driver, wait);
         signupPage = new SignupPage(driver, wait);
+        adminCitiesPage = new AdminCitiesPage(driver, wait);
     }
 
     @AfterClass
