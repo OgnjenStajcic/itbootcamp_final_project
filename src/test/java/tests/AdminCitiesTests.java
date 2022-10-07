@@ -11,17 +11,18 @@ import java.time.Duration;
 
 public class AdminCitiesTests extends BaseTestPage{
 
-// ovde pravi faker i String city
 
     Faker faker = new Faker();
-    private String city = faker.address().city();
+    //private String city = faker.address().city();
+    private String city = "Ognjen";
+    private String edited = " - edited";
 
     @Test(priority = 1)
     public void citiesPage() throws InterruptedException {
         homePage.login();
         loginPage.login();
         adminCitiesPage.adminClick();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
        // Thread.sleep(3000);
         adminCitiesPage.cities();
         Assert.assertTrue(driver.getCurrentUrl().contains("/admin/cities"));
@@ -36,10 +37,11 @@ public class AdminCitiesTests extends BaseTestPage{
         loginPage.login();
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.newItem();
+        adminCitiesPage.newItem(city);
         Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
+        System.out.println(city);
     }
 
 
@@ -50,10 +52,13 @@ public class AdminCitiesTests extends BaseTestPage{
         loginPage.login();
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.editCity();
+        adminCitiesPage.getEdit().click();
+        Thread.sleep(2000);
+        adminCitiesPage.editCity(city, edited);
         Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
+        System.out.println(city);
     }
 
 
@@ -62,15 +67,15 @@ public class AdminCitiesTests extends BaseTestPage{
     //assert:
     //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
 
-    @Test(priority = 4)
-    public void searchCity(){
-        homePage.login();
-        loginPage.login();
-        adminCitiesPage.adminClick();
-        adminCitiesPage.cities();
-        adminCitiesPage.editCity();
-        WebElement search = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[2]/div"));
-        search.sendKeys(adminCitiesPage.getCity());
-    }
+//    @Test(priority = 4)
+//    public void searchCity(){
+//        homePage.login();
+//        loginPage.login();
+//        adminCitiesPage.adminClick();
+//        adminCitiesPage.cities();
+//        adminCitiesPage.editCity();
+//        WebElement search = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[2]/div"));
+//        search.sendKeys(adminCitiesPage.getCity());
+//    }
 
 }

@@ -73,19 +73,20 @@ public class AdminCitiesPage extends BasePage{
         getCities().click();
     }
 
-    public void newItem(){
+    public void newItem(String city) throws InterruptedException {
         getNewItem().click();
         getName().click();
-        city = getFaker().address().city();
         getName().sendKeys(city);
+        Thread.sleep(7000);
         getSave().click();
     }
 
 
-    public void editCity(){
-        getEdit().click();
-        getName().click();
-        getName().sendKeys(city + " - edited");
+    public void editCity(String city, String edited) throws InterruptedException {
+        //getName().click();
+        getName().clear();
+        getName().sendKeys(city, edited);
+        Thread.sleep(9000);
         getSave().click();
     }
 
