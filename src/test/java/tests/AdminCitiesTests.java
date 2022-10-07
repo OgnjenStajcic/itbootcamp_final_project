@@ -14,8 +14,8 @@ public class AdminCitiesTests extends BaseTestPage{
 
     Faker faker = new Faker();
     //private String city = faker.address().city();
-    private String city = "Ognjen";
-    private String edited = " - edited";
+
+
 
     @Test(priority = 1)
     public void citiesPage() throws InterruptedException {
@@ -37,11 +37,11 @@ public class AdminCitiesTests extends BaseTestPage{
         loginPage.login();
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.newItem(city);
+        adminCitiesPage.newItem(adminCitiesPage.getCity());
         Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
-        System.out.println(city);
+        System.out.println(adminCitiesPage.getCity());
     }
 
 
@@ -53,12 +53,11 @@ public class AdminCitiesTests extends BaseTestPage{
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
         adminCitiesPage.getEdit().click();
-        Thread.sleep(2000);
-        adminCitiesPage.editCity(city, edited);
+        adminCitiesPage.editCity();
         Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
-        System.out.println(city);
+        System.out.println(adminCitiesPage.getEditedCity());
     }
 
 
@@ -67,15 +66,20 @@ public class AdminCitiesTests extends BaseTestPage{
     //assert:
     //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
 
-//    @Test(priority = 4)
-//    public void searchCity(){
-//        homePage.login();
-//        loginPage.login();
-//        adminCitiesPage.adminClick();
-//        adminCitiesPage.cities();
-//        adminCitiesPage.editCity();
-//        WebElement search = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[2]/div"));
-//        search.sendKeys(adminCitiesPage.getCity());
-//    }
+    @Test(priority = 4)
+    public void searchCity() throws InterruptedException {
+        homePage.login();
+        loginPage.login();
+        adminCitiesPage.adminClick();
+        adminCitiesPage.cities();
+        adminCitiesPage.search();
+        Thread.sleep(7000);
+        String expected = driver.findElement(By.xpath(" //*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td")).getText();
+        Assert.assertTrue(adminCitiesPage.getSearch().getText().contains(expected));
+
+
+
+
+    }
 
 }

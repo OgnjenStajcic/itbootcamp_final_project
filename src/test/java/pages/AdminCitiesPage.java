@@ -17,12 +17,26 @@ public class AdminCitiesPage extends BasePage{
     protected Faker faker = new Faker();
     protected By save = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]/span");
     protected By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span");
-    private String city;
     protected By edit = By.xpath("//*[@id=\"edit\"]/span/i");
+    private By search = By.id("search");
+    private String city = "Ognjen";
+    private String editedCity = city + " - edited";
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getEditedCity() {
+        return editedCity;
+    }
+
+    public void setEditedCity(String editedCity) {
+        this.editedCity = editedCity;
     }
 
     public WebElement getLogout() {
@@ -45,12 +59,8 @@ public class AdminCitiesPage extends BasePage{
         return getDriver().findElement(save);
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public WebElement getSearch() {
+        return getDriver().findElement(search);
     }
 
     public WebElement getEdit() {
@@ -82,12 +92,15 @@ public class AdminCitiesPage extends BasePage{
     }
 
 
-    public void editCity(String city, String edited) throws InterruptedException {
-        //getName().click();
+    public void editCity() throws InterruptedException {
         getName().clear();
-        getName().sendKeys(city, edited);
-        Thread.sleep(9000);
+        getName().sendKeys(editedCity);
         getSave().click();
+    }
+
+    public void search(){
+        getSearch().clear();
+        getSearch().sendKeys(editedCity);
     }
 
 
