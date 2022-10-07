@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,7 +11,10 @@ import java.time.Duration;
 
 public class AdminCitiesTests extends BaseTestPage{
 
+// ovde pravi faker i String city
 
+    Faker faker = new Faker();
+    private String city = faker.address().city();
 
     @Test(priority = 1)
     public void citiesPage() throws InterruptedException {
@@ -39,11 +43,6 @@ public class AdminCitiesTests extends BaseTestPage{
     }
 
 
-    //Test #3: Edit city
-    //Podaci: edituje se grad koji je u testu 2 kreiran na isto ime + - edited
-    //(primer: Beograd – Beograd edited)
-    //assert:
-    //Verifikovati da poruka sadrzi tekst Saved successfully
 
     @Test(priority = 3)
     public void editCity() throws InterruptedException {
@@ -51,16 +50,27 @@ public class AdminCitiesTests extends BaseTestPage{
         loginPage.login();
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.newItem();
-        WebElement edit = driver.findElement(By.xpath("//*[@id=\"edit\"]/span/i"));
-        edit.click();
-        WebElement name = driver.findElement(By.id("name"));
-        name.sendKeys(" - edited");
-        adminCitiesPage.getSave().click();
+        adminCitiesPage.editCity();
         Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
+    }
 
+
+    //Test #4: Search city
+    //Podaci: editovani grad iz testa #3
+    //assert:
+    //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
+
+    @Test(priority = 4)
+    public void searchCity(){
+        homePage.login();
+        loginPage.login();
+        adminCitiesPage.adminClick();
+        adminCitiesPage.cities();
+        adminCitiesPage.editCity();
+        WebElement search = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[2]/div"));
+        search.sendKeys(adminCitiesPage.getCity());
     }
 
 }

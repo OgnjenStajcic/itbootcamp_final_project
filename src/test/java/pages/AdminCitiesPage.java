@@ -18,6 +18,7 @@ public class AdminCitiesPage extends BasePage{
     protected By save = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]/span");
     protected By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span");
     private String city;
+    protected By edit = By.xpath("//*[@id=\"edit\"]/span/i");
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait wait) {
@@ -52,6 +53,10 @@ public class AdminCitiesPage extends BasePage{
         this.city = city;
     }
 
+    public WebElement getEdit() {
+        return getDriver().findElement(edit);
+    }
+
     public Faker getFaker() {
         return faker;
     }
@@ -70,15 +75,18 @@ public class AdminCitiesPage extends BasePage{
 
     public void newItem(){
         getNewItem().click();
-        //WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        city = faker.address().city();
+        getName().click();
+        city = getFaker().address().city();
         getName().sendKeys(city);
         getSave().click();
-
     }
 
-    public void logout(){
-        getLogout().click();
+
+    public void editCity(){
+        getEdit().click();
+        getName().click();
+        getName().sendKeys(city + " - edited");
+        getSave().click();
     }
 
 
