@@ -2,6 +2,7 @@ package pages;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +19,7 @@ public class AdminCitiesPage extends BasePage{
     protected By save = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]/span");
     protected By logout = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span");
     protected By edit = By.xpath("//*[@id=\"edit\"]/span/i");
+
     private By search = By.id("search");
     private String city = "Ognjen";
     private String editedCity = city + " - edited";
@@ -75,6 +77,7 @@ public class AdminCitiesPage extends BasePage{
         return getDriver().findElement(newItem);
     }
 
+
     public void adminClick(){
         getAdmin().click();
     }
@@ -83,17 +86,18 @@ public class AdminCitiesPage extends BasePage{
         getCities().click();
     }
 
-    public void newItem(String city) throws InterruptedException {
+    public void newItem() throws InterruptedException {
         getNewItem().click();
         getName().click();
         getName().sendKeys(city);
-        Thread.sleep(7000);
+        Thread.sleep(2000);
         getSave().click();
     }
 
 
     public void editCity() throws InterruptedException {
-        getName().clear();
+        getName().click();
+        //getName().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
         getName().sendKeys(editedCity);
         getSave().click();
     }

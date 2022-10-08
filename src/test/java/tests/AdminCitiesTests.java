@@ -3,6 +3,7 @@ package tests;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,10 +12,7 @@ import java.time.Duration;
 
 public class AdminCitiesTests extends BaseTestPage{
 
-
     Faker faker = new Faker();
-    //private String city = faker.address().city();
-
 
 
     @Test(priority = 1)
@@ -37,7 +35,7 @@ public class AdminCitiesTests extends BaseTestPage{
         loginPage.login();
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
-        adminCitiesPage.newItem(adminCitiesPage.getCity());
+        adminCitiesPage.newItem();
         Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
@@ -76,10 +74,40 @@ public class AdminCitiesTests extends BaseTestPage{
         Thread.sleep(7000);
         String expected = driver.findElement(By.xpath(" //*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td")).getText();
         Assert.assertTrue(adminCitiesPage.getSearch().getText().contains(expected));
+    }
 
+    //Test #5: Delete city
+    //Podaci: editovani grad iz testa #3
+    //assert:
+    //U polje za pretragu uneti staro ime grada
+    //Sacekati da broj redova u tabeli bude 1
+    //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
+    //Kliknuti na dugme Delete iz prvog reda
+    //Sacekati da se dijalog za brisanje pojavi
+    //Kliknuti na dugme Delete iz dijaloga
+    //Sacekati da popu za prikaz poruke bude vidljiv
+    //Verifikovati da poruka sadrzi tekst Deleted successfully
 
-
+    @Test(priority = 5)
+    public void deleteCity() throws InterruptedException {
+        homePage.login();
+        loginPage.login();
+        adminCitiesPage.adminClick();
+        Thread.sleep(2000);
+        adminCitiesPage.cities();
+        adminCitiesPage.getSearch().sendKeys(adminCitiesPage.getCity());
+        String expected = adminCitiesPage.getCity();
+        WebElement actual = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td[2]"));
+        Assert.assertTrue(actual.getText().contains(expected));
+        WebElement deleteIcon = driver.findElement(By.xpath("//*[@id=\"delete\"]/span"));
+        deleteIcon.click();
+        WebElement delete = driver.findElement(By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span"));
+        delete.click();
+        WebElement messageBox = driver.findElement (By.xpath("//*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
+        // //*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]
+        Assert.assertTrue(messageBox.getText().contains("Delete successfully"));
 
     }
 
 }
+// //*[@id="app"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div - closeMsg
