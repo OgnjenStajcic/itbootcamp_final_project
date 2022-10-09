@@ -7,15 +7,9 @@ import java.time.Duration;
 
 public class ProfileTests extends BaseTestPage{
 
-    //Test #1: Edits profile
-    //Podaci: random podaci korišćenjem faker library-ja
-    //assert:
-    //Verifikovati da je prikazana poruka Profile saved successfuly
-    //Verifikovati da svaki input sada za value atribut ima vrednost koja
-    //je uneta u okviru forme
-
     @Test
     private void editProfile() throws InterruptedException {
+
         homePage.login();
         loginPage.login();
         profileTestsPage.getMyProfile().click();
@@ -27,8 +21,8 @@ public class ProfileTests extends BaseTestPage{
         profileTestsPage.gitHubChange(profileTestsPage.getRandomGit());
         profileTestsPage.getSave().click();
 
-//        String actual = profileTestsPage.getMsgBox().getText();
-//        Assert.assertTrue(actual.contains("Profile saved successfuly"));
+        String actual = profileTestsPage.getMsgBox().getText();
+        Assert.assertTrue(actual.contains("Profile saved successfuly"));
 
         String expctdName = profileTestsPage.getRandomName();
         String actualName = profileTestsPage.getName().getAttribute("value");
@@ -53,9 +47,6 @@ public class ProfileTests extends BaseTestPage{
         String expctdGit = profileTestsPage.getRandomGit();
         String actualGit = profileTestsPage.getGitHub().getAttribute("value");
         Assert.assertEquals(actualGit, expctdGit);
-
-
-
     }
 
 }

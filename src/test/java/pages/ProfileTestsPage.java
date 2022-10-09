@@ -24,14 +24,14 @@ public class ProfileTestsPage extends BasePage{
     protected By save = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[8]/button");
     protected By chosenCity = By.xpath("//*[@id=\"list-item-163-1\"]/div/div");
 
-    protected By msgBox = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div");
+    protected By msgBox = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]");
     Faker faker = new Faker();
 
     protected String randomName = faker.name().fullName();
     protected String randomPhone = faker.phoneNumber().cellPhone();
     protected String randomCountry = faker.address().country();
-    protected String randomTwitter = faker.internet().url();
-    protected String randomGit = faker.internet().url();
+    protected String randomTwitter = "http://" + faker.name().firstName().toLowerCase() + ".name";
+    protected String randomGit = "http://" + faker.name().firstName().toLowerCase() + ".biz";
 
 
 
@@ -123,9 +123,12 @@ public class ProfileTestsPage extends BasePage{
     // //*[@id="app"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[4]/span/div/div/div[1]/div[1]/div[1]/div/button
 
 
-    public void nameChange(String name){
+    public void nameChange(String name) throws InterruptedException {
         getName().click();
+        Thread.sleep(3000);
         getName().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        Thread.sleep(3000);
+
         getName().sendKeys(name);
     }
 
@@ -135,28 +138,31 @@ public class ProfileTestsPage extends BasePage{
         getPhone().sendKeys(phone);
     }
 
+
     public void cityChange() throws InterruptedException {
-        getMyProfile().click();
         getCity().click();
         Thread.sleep(3000);
         getChosenCity().click();
     }
 
-    public void countryChange(String country){
+    public void countryChange(String country) throws InterruptedException {
         getCountry().click();
-        getName().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        getCountry().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        Thread.sleep(3000);
         getCountry().sendKeys(country);
     }
 
-    public void twitterChange(String twitter){
+    public void twitterChange(String twitter) throws InterruptedException {
         getTwitter().click();
-        getName().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        getTwitter().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        Thread.sleep(3000);
         getTwitter().sendKeys(twitter);
     }
 
-    public void gitHubChange(String git){
+    public void gitHubChange(String git) throws InterruptedException {
         getGitHub().click();
-        getName().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        getGitHub().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
+        Thread.sleep(3000);
         getGitHub().sendKeys(git);
     }
 

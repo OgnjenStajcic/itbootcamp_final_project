@@ -39,10 +39,10 @@ public abstract class BaseTestPage {
         profileTestsPage = new ProfileTestsPage(driver, wait);
     }
 
-    @AfterClass
-    public void afterClass(){
-        driver.quit();
-    }
+//    @AfterClass
+//    public void afterClass(){
+//        driver.quit();
+//    }
 
     @BeforeMethod
     public void beforeMethod(){
@@ -50,13 +50,13 @@ public abstract class BaseTestPage {
     }
 
 
-    @AfterMethod
-    public void afterMethod(){
-        List <WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
-        if (logout.size() == 1){
-            logout.get(0).click();
-        }
-    }
+  //  @AfterMethod
+//    public void afterMethod(){
+//        List <WebElement> logout = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
+//        if (logout.size() == 1){
+//            logout.get(0).click();
+//        }
+//    }
 
 
 
