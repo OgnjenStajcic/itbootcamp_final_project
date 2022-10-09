@@ -76,17 +76,6 @@ public class AdminCitiesTests extends BaseTestPage{
         Assert.assertTrue(adminCitiesPage.getSearch().getText().contains(expected));
     }
 
-    //Test #5: Delete city
-    //Podaci: editovani grad iz testa #3
-    //assert:
-    //U polje za pretragu uneti staro ime grada
-    //Sacekati da broj redova u tabeli bude 1
-    //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
-    //Kliknuti na dugme Delete iz prvog reda
-    //Sacekati da se dijalog za brisanje pojavi
-    //Kliknuti na dugme Delete iz dijaloga
-    //Sacekati da popu za prikaz poruke bude vidljiv
-    //Verifikovati da poruka sadrzi tekst Deleted successfully
 
     @Test(priority = 5)
     public void deleteCity() throws InterruptedException {
@@ -103,9 +92,10 @@ public class AdminCitiesTests extends BaseTestPage{
         deleteIcon.click();
         WebElement delete = driver.findElement(By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span"));
         delete.click();
-        WebElement messageBox = driver.findElement (By.xpath("//*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
-        // //*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]
-        Assert.assertTrue(messageBox.getText().contains("Delete successfully"));
+//        String expct = "Delete successfully\nCLOSE";
+//        WebElement messageBox = driver.findElement (By.xpath("//*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
+//        // //*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]
+//        Assert.assertEquals(messageBox.getText(), expct);
 
     }
 

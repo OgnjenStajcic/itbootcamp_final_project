@@ -9,10 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.AdminCitiesPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.SignupPage;
+import pages.*;
 
 import java.time.Duration;
 import java.util.List;
@@ -25,6 +22,7 @@ public abstract class BaseTestPage {
     protected HomePage homePage;
     protected SignupPage signupPage;
     protected AdminCitiesPage adminCitiesPage;
+    protected ProfileTestsPage profileTestsPage;
 
 
     @BeforeClass
@@ -38,6 +36,7 @@ public abstract class BaseTestPage {
         homePage = new HomePage(driver, wait);
         signupPage = new SignupPage(driver, wait);
         adminCitiesPage = new AdminCitiesPage(driver, wait);
+        profileTestsPage = new ProfileTestsPage(driver, wait);
     }
 
     @AfterClass
