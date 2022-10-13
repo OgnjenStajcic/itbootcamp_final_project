@@ -33,13 +33,13 @@ public class LoginPage extends BasePage {
         return faker;
     }
 
-    public void login(){
+    public void login() {
         getEmail().sendKeys("admin@admin.com");
         getPassword().sendKeys("12345");
         getLoginBtn().click();
     }
 
-    public void fakeLogin(){
+    public void fakeLogin() {
         String email = faker.internet().emailAddress();
         String pass = faker.internet().password();
         getEmail().click();
@@ -50,22 +50,18 @@ public class LoginPage extends BasePage {
     }
 
 
-    public void wrongPass(String pass){
-            getEmail().sendKeys("admin@admin.com");
-            getPassword().sendKeys(pass);
-            if(pass != "12345"){
+    public void wrongPass(String pass) {
+        getEmail().sendKeys("admin@admin.com");
+        getPassword().sendKeys(pass);
+        if (pass != "12345") {
             getLoginBtn().click();
-            }
         }
-
-
-
-
-    public String getAttribute(){
-        return  getEmail().getAttribute("type");
     }
 
 
+    public String getAttribute() {
+        return getEmail().getAttribute("type");
+    }
 
 
 }

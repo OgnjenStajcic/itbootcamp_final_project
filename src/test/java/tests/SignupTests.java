@@ -17,7 +17,7 @@ public class SignupTests extends BaseTestPage{
 
 
     @Test(priority = 2)
-    public void inputTypes() throws InterruptedException {
+    public void inputTypes() {
         homePage.signup();
         String typeEmail = "email";
         String actTypeEmail = signupPage.getEmail().getAttribute("type");

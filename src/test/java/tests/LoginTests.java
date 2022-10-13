@@ -16,7 +16,6 @@ public class LoginTests extends BaseTestPage{
         Thread.sleep(2000);
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("/login"));
-
     }
 
     @Test(priority = 2)

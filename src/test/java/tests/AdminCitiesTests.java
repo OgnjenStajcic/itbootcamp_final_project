@@ -15,13 +15,11 @@ public class AdminCitiesTests extends BaseTestPage{
     Faker faker = new Faker();
 
 
-    @Test(priority = 1)
+    @Test()
     public void citiesPage() throws InterruptedException {
         homePage.login();
         loginPage.login();
         adminCitiesPage.adminClick();
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-       // Thread.sleep(3000);
         adminCitiesPage.cities();
         Assert.assertTrue(driver.getCurrentUrl().contains("/admin/cities"));
         WebElement logoutBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]/span"));
@@ -29,7 +27,7 @@ public class AdminCitiesTests extends BaseTestPage{
     }
 
 
-    @Test(priority = 2)
+    @Test()
     public void createNewCity() throws InterruptedException {
         homePage.login();
         loginPage.login();
@@ -44,7 +42,7 @@ public class AdminCitiesTests extends BaseTestPage{
 
 
 
-    @Test(priority = 3)
+    @Test(dependsOnMethods = {"createNewCity"})
     public void editCity() throws InterruptedException {
         homePage.login();
         loginPage.login();
@@ -59,12 +57,7 @@ public class AdminCitiesTests extends BaseTestPage{
     }
 
 
-    //Test #4: Search city
-    //Podaci: editovani grad iz testa #3
-    //assert:
-    //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
-
-    @Test(priority = 4)
+    @Test(dependsOnMethods = {"createNewCity", "editCity"})
     public void searchCity() throws InterruptedException {
         homePage.login();
         loginPage.login();
@@ -77,7 +70,7 @@ public class AdminCitiesTests extends BaseTestPage{
     }
 
 
-    @Test(priority = 5)
+    @Test(priority = 1, dependsOnMethods = {"createNewCity", "editCity"})
     public void deleteCity() throws InterruptedException {
         homePage.login();
         loginPage.login();
@@ -92,10 +85,13 @@ public class AdminCitiesTests extends BaseTestPage{
         deleteIcon.click();
         WebElement delete = driver.findElement(By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span"));
         delete.click();
-//        String expct = "Delete successfully\nCLOSE";
+//        wait.until(ExpectedConditions.textToBe(By.xpath("//*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Deleted successfully\nCLOSE"));
+//        boolean deleteMsgBox = driver.findElement(By.xpath("//*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")).getText().contains("Deleted successfully");
+//        Assert.assertTrue(deleteMsgBox);
+//        String expct = "Delete successfully" + "\nCLOSE";
 //        WebElement messageBox = driver.findElement (By.xpath("//*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
 //        // //*[@id='app']/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]
-//        Assert.assertEquals(messageBox.getText(), expct);
+//        Assert.assertTrue(messageBox.getText().contains(expct));
 
     }
 

@@ -34,9 +34,6 @@ public class ProfileTestsPage extends BasePage{
     protected String randomGit = "http://" + faker.name().firstName().toLowerCase() + ".biz";
 
 
-
-
-
     public ProfileTestsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
