@@ -34,7 +34,6 @@ public class AdminCitiesTests extends BaseTestPage{
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
         adminCitiesPage.newItem();
-        Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
         System.out.println(adminCitiesPage.getCity());
@@ -50,7 +49,6 @@ public class AdminCitiesTests extends BaseTestPage{
         adminCitiesPage.cities();
         adminCitiesPage.getEdit().click();
         adminCitiesPage.editCity();
-        Thread.sleep(2000);
         WebElement msgBox = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"));
         Assert.assertTrue(msgBox.getText().contains("Saved successfully"));
         System.out.println(adminCitiesPage.getEditedCity());
@@ -64,7 +62,6 @@ public class AdminCitiesTests extends BaseTestPage{
         adminCitiesPage.adminClick();
         adminCitiesPage.cities();
         adminCitiesPage.search();
-        Thread.sleep(7000);
         String expected = driver.findElement(By.xpath(" //*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td")).getText();
         Assert.assertTrue(adminCitiesPage.getSearch().getText().contains(expected));
     }
@@ -96,4 +93,3 @@ public class AdminCitiesTests extends BaseTestPage{
     }
 
 }
-// //*[@id="app"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div - closeMsg
